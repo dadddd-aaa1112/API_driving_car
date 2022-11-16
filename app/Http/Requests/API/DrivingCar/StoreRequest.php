@@ -26,7 +26,6 @@ class StoreRequest extends FormRequest
         return [
             'client_id' => 'required|exists:clients,id',
             'car_id' => 'required|exists:cars,id',
-            'status' => 'required|exists:statuses,code',
         ];
     }
 
@@ -37,8 +36,7 @@ class StoreRequest extends FormRequest
             'client_id.exists' => 'Необходимо выбрать существующего клиента из базы',
             'car_id.required' => 'Необходимо указать автомобиль',
             'car_id.exists' => 'Необходимо выбрать существующий автомобиль из базы',
-            'status.required' => 'Необходимо указать статус',
-            'status.exists' => 'Необходимо выбрать существующий статус из базы',
+
         ];
     }
 }

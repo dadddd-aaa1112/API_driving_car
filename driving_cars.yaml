@@ -6,7 +6,7 @@ info:
     url: https://www.apache.org/licenses/LICENSE-2.0.html
   version: 0.0.1
 servers:
-  - url: http://localhost:8080/api/
+  - url: http://localhost:8000/api/
     description: Dev server
 
 paths:
@@ -37,6 +37,13 @@ paths:
       operationId: storeCar
       tags:
         - Car
+      parameters:
+        - name: api_key
+          in: header
+          description: в header добавить 'Authorization' => 'Bearer sfdaa13ffdgt484dfgrdfsewml7idfx9c'
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -103,6 +110,12 @@ paths:
           description: Идентификатор автомобиля
           schema:
             type: string
+        - name: api_key
+          in: header
+          description: в header добавить 'Authorization' => 'Bearer sfdaa13ffdgt484dfgrdfsewml7idfx9c'
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -142,6 +155,12 @@ paths:
           description: Идентификатор автомобиля
           schema:
             type: string
+        - name: api_key
+          in: header
+          description: в header добавить 'Authorization' => 'Bearer sfdaa13ffdgt484dfgrdfsewml7idfx9c'
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           "description": Успешное удаление
@@ -179,6 +198,13 @@ paths:
       operationId: storeclient
       tags:
         - Client
+      parameters:
+        - name: api_key
+          in: header
+          description: в header добавить 'Authorization' => 'Bearer sfdaa13ffdgt484dfgrdfsewml7idfx9c'
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -245,6 +271,12 @@ paths:
           description: Идентификатор клиента
           schema:
             type: string
+        - name: api_key
+          in: header
+          description: в header добавить 'Authorization' => 'Bearer sfdaa13ffdgt484dfgrdfsewml7idfx9c'
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -282,6 +314,12 @@ paths:
           in: path
           required: true
           description: Идентификатор клиента
+          schema:
+            type: string
+        - name: api_key
+          in: header
+          description: в header добавить 'Authorization' => 'Bearer sfdaa13ffdgt484dfgrdfsewml7idfx9c'
+          required: true
           schema:
             type: string
       responses:
@@ -322,6 +360,13 @@ paths:
       operationId: storedriving_cars
       tags:
         - Driving cars
+      parameters:
+        - name: api_key
+          in: header
+          description: в header добавить 'Authorization' => 'Bearer sfdaa13ffdgt484dfgrdfsewml7idfx9c'
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -388,6 +433,12 @@ paths:
           description: Идентификатор записи управления автомобилем
           schema:
             type: string
+        - name: api_key
+          in: header
+          description: в header добавить 'Authorization' => 'Bearer sfdaa13ffdgt484dfgrdfsewml7idfx9c'
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
@@ -425,6 +476,12 @@ paths:
           in: path
           required: true
           description: Идентификатор записи управления автомобилем
+          schema:
+            type: string
+        - name: api_key
+          in: header
+          description: в header добавить 'Authorization' => 'Bearer sfdaa13ffdgt484dfgrdfsewml7idfx9c'
+          required: true
           schema:
             type: string
       responses:
