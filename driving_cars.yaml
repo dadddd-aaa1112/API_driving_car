@@ -1,0 +1,517 @@
+openapi: 3.0.0
+info:
+  title: API спецификация по управлению автомобилем пользователями
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 0.0.1
+servers:
+  - url: http://localhost:8080/api/
+    description: Dev server
+
+paths:
+
+  /cars:
+    get:
+      summary: Метод получения автомобилей
+      description: Метод предназначен для получения списка всех автомобилей, сохраненных в БД.
+      operationId: getCars
+      tags:
+        - Car
+      responses:
+        '200':
+          "description": Список автомобилей
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/cars"
+        default:
+          description: Любая неожиданная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Метод добавления нового автомобиля в каталог
+      description: Метод предназначен для сохранения в БД данных по новой машине.
+      operationId: storeCar
+      tags:
+        - Car
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/Car"
+      responses:
+        '200':
+          "description": Подтверждение успешного сохранения
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Car"
+        '400':
+          "description": Некорректные входные данные. Возвращает список атрибутов с ошибками
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        default:
+          description: Любая неожиданная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /cars/{id}:
+    get:
+      summary: Метод получения автомобиля по идентификатору
+      operationId: getCarById
+      tags:
+        - Car
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор автомобиля
+          schema:
+            type: string
+      responses:
+        '200':
+          "description": Автомобиль
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Car"
+        default:
+          description: Любая неожиданная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    patch:
+      summary: Метод обновления автомобиля в каталоге
+      description: Метод предназначен для обновления в БД данных по имеющейся машине.
+      operationId: updateCar
+      tags:
+        - Car
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор автомобиля
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/Car"
+      responses:
+        '200':
+          "description": Подтверждение успешного обновления
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Car"
+        '400':
+          "description": Некорректные входные данные. Возвращает список атрибутов с ошибками
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        default:
+          description: Любая неожиданная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Метод удаления автомобиля по идентификатору
+      operationId: deleteCarById
+      tags:
+        - Car
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор автомобиля
+          schema:
+            type: string
+      responses:
+        '200':
+          "description": Успешное удаление
+          content:
+            'application/json': {}
+        default:
+          description: Любая неожиданная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /clients:
+    get:
+      summary: Метод получения клиентов
+      description: Метод предназначен для получения списка всех клиентов, сохраненных в БД.
+      operationId: getclients
+      tags:
+        - Client
+      responses:
+        '200':
+          "description": Список клиентов
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/clients"
+        default:
+          description: Любая неожиданная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Метод добавления нового клиента в каталог
+      description: Метод предназначен для сохранения в БД данных по новому клиенту.
+      operationId: storeclient
+      tags:
+        - Client
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/client"
+      responses:
+        '200':
+          "description": Подтверждение успешного сохранения
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/client"
+        '400':
+          "description": Некорректные входные данные. Возвращает список атрибутов с ошибками
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        default:
+          description: Любая неожиданная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /clients/{id}:
+    get:
+      summary: Метод получения клиента по идентификатору
+      operationId: getclientById
+      tags:
+        - Client
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор клиента
+          schema:
+            type: string
+      responses:
+        '200':
+          "description": клиент
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/client"
+        default:
+          description: Любая неожиданная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    patch:
+      summary: Метод обновления клиента в каталоге
+      description: Метод предназначен для обновления в БД данных по имеющемуся клиенту.
+      operationId: updateclient
+      tags:
+        - Client
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор клиента
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/client"
+      responses:
+        '200':
+          "description": Подтверждение успешного обновления
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/client"
+        '400':
+          "description": Некорректные входные данные. Возвращает список атрибутов с ошибками
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        default:
+          description: Любая неожиданная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Метод удаления клиента по идентификатору
+      operationId: deleteclientById
+      tags:
+        - Client
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор клиента
+          schema:
+            type: string
+      responses:
+        '200':
+          "description": Успешное удаление
+          content:
+            'application/json': {}
+        default:
+          description: Любая неожиданная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /driving_cars:
+    get:
+      summary: Метод получения списка управления автомобилем
+      description: Метод предназначен для получения списка всех записей списка управления автомобилем, сохраненных в БД.
+      operationId: getdriving_cars
+      tags:
+        - Driving cars
+      responses:
+        '200':
+          "description": Список списка управления автомобилем
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/driving_cars"
+        default:
+          description: Любая неожиданная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Метод добавления новой записи управления автомобилем в каталог
+      description: Метод предназначен для сохранения в БД данных по новой записи управления автомобилем.
+      operationId: storedriving_cars
+      tags:
+        - Driving cars
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/driving_cars"
+      responses:
+        '200':
+          "description": Подтверждение успешного сохранения
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/driving_cars"
+        '400':
+          "description": Некорректные входные данные. Возвращает список атрибутов с ошибками
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        default:
+          description: Любая неожиданная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /driving_cars/{id}:
+    get:
+      summary: Метод получения записи управления автомобилем по идентификатору
+      operationId: getdriving_carsById
+      tags:
+        - Driving cars
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор записи управления автомобилем
+          schema:
+            type: string
+      responses:
+        '200':
+          "description": клиент
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/driving_cars"
+        default:
+          description: Любая неожиданная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    patch:
+      summary: Метод обновления записи управления автомобилем в каталоге
+      description: Метод предназначен для обновления в БД данных по имеющейся записи управления автомобилем.
+      operationId: updatedriving_cars
+      tags:
+        - Driving cars
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор записи управления автомобилем
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          'application/json':
+            schema:
+              $ref: "#/components/schemas/driving_cars"
+      responses:
+        '200':
+          "description": Подтверждение успешного обновления
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/driving_cars"
+        '400':
+          "description": Некорректные входные данные. Возвращает список атрибутов с ошибками
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        default:
+          description: Любая неожиданная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Метод удаления записи управления автомобилем по идентификатору
+      operationId: deletedriving_carsById
+      tags:
+        - Driving cars
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Идентификатор записи управления автомобилем
+          schema:
+            type: string
+      responses:
+        '200':
+          "description": Успешное удаление
+          content:
+            'application/json': {}
+        default:
+          description: Любая неожиданная ошибка
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+
+
+
+components:
+  schemas:
+    driving_car:
+      type: object
+      required:
+        - client_id
+        - car_id
+        - status
+      properties:
+        id:
+          type: string
+          example: 1
+        client_id:
+          description: id клиента, управляющего автомобилем
+          type: integer
+          example: 3
+        car_id:
+          description: id автомобиля, которым управляет клиент
+          type: integer
+          example: 2
+        status:
+          description: статус записи - 0, если автомобиль уже не занят, клиент свободен и 1 - автомобиль на текущий момент занят клиентом
+          type: integer
+          example: 0
+    driving_cars:
+      type: array
+      items:
+        $ref: "#/components/schemas/driving_cars"
+
+    client:
+      type: object
+      required:
+        - full_name
+      properties:
+        id:
+          type: string
+          example: 1
+        full_name:
+          description: Полное имя клиента
+          type: string
+          example: Alexandr Alexandrovich Ivanov
+    clients:
+      type: array
+      items:
+        $ref: "#/components/schemas/client"
+
+    Car:
+      type: object
+      required:
+        - reg_number
+      properties:
+        id:
+          type: string
+          example: 1
+        reg_number:
+          description: Название автомобиля
+          type: string
+          example: ax983r
+    cars:
+      type: array
+      items:
+        $ref: "#/components/schemas/Car"
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
