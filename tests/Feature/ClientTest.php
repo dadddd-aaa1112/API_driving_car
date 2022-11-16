@@ -8,11 +8,14 @@ use Tests\TestCase;
 
 class ClientTest extends TestCase
 {
-    //    public function setUp(): void
-//    {
-//        parent::setUp();
-//        $this->refreshApplication();
-//    }
+    public static function getHeaders()
+    {
+        return
+            [
+                'Accept' => 'application/json',
+                'Authorization' => 'Bearer sfdaa13ffdgt484dfgrdfsewml7idfx9c'
+            ];
+    }
 
     public function testIndexClient()
     {
@@ -28,31 +31,30 @@ class ClientTest extends TestCase
 
     public function testDestroyClient()
     {
-        $response = $this->delete('/api/clients/4');
+        $response = $this->withHeaders(self::getHeaders())
+            ->delete('/api/clients/7');
         $response->assertStatus(200);
     }
 
     public function testStoreClient()
     {
-        $data = [];
-        $response = $this->post('/api/clients', $data);
-        $response->assertStatus(302);
-        $data = [
-            'full_name' => 'Test Test'
-        ];
-        $response = $this->post('/api/clients', $data);
+        $response = $this->withHeaders(self::getHeaders())
+            ->post('/api/clients', []);
+        $response->assertStatus(422);
+
+        $response = $this->withHeaders(self::getHeaders())
+            ->post('/api/clients', ['full_name' => 'Test Test Test2']);
         $response->assertStatus(201);
     }
 
     public function testUpdateClient()
     {
-        $data = [];
-        $response = $this->patch('/api/clients/7', $data);
-        $response->assertStatus(302);
-        $data = [
-            'full_name' => 'Test Test2 edit'
-        ];
-        $response = $this->patch('/api/clients/7', $data);
+        $response = $this->withHeaders(self::getHeaders())
+            ->patch('/api/clients/10', []);
+        $response->assertStatus(422);
+
+        $response = $this->withHeaders(self::getHeaders())
+            ->patch('/api/clients/10', ['full_name' => 'Test Test2 edit edit']);
         $response->assertStatus(200);
     }
 }
