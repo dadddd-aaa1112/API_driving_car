@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Car::factory(15)->create();
-        Client::factory(15)->create();
+        Car::factory(30)->create();
+        Client::factory(30)->create();
 
         \App\Models\Status::create([
             'code' => 0,
