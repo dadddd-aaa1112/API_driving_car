@@ -33,7 +33,7 @@ paths:
                 $ref: "#/components/schemas/Error"
     post:
       summary: Метод добавления нового автомобиля в каталог
-      description: Метод предназначен для сохранения в БД данных по новой машине.
+      description: Метод предназначен для сохранения в БД данных новую машину.
       operationId: storeCar
       tags:
         - Car
@@ -41,6 +41,12 @@ paths:
         - name: api_key
           in: header
           description: в header добавить 'Authorization' => 'Bearer sfdaa13ffdgt484dfgrdfsewml7idfx9c'
+          required: true
+          schema:
+            type: string
+        - name: reg_number
+          in: query
+          description: добавить регистрационный номер автомобиля
           required: true
           schema:
             type: string
@@ -194,7 +200,7 @@ paths:
                 $ref: "#/components/schemas/Error"
     post:
       summary: Метод добавления нового клиента в каталог
-      description: Метод предназначен для сохранения в БД данных по новому клиенту.
+      description: Метод предназначен для сохранения в БД данных нового клиента.
       operationId: storeclient
       tags:
         - Client
@@ -202,6 +208,12 @@ paths:
         - name: api_key
           in: header
           description: в header добавить 'Authorization' => 'Bearer sfdaa13ffdgt484dfgrdfsewml7idfx9c'
+          required: true
+          schema:
+            type: string
+        - name: full_name
+          in: query
+          description: добавить полное имя нового клиента
           required: true
           schema:
             type: string
@@ -356,7 +368,7 @@ paths:
                 $ref: "#/components/schemas/Error"
     post:
       summary: Метод добавления новой записи управления автомобилем в каталог
-      description: Метод предназначен для сохранения в БД данных по новой записи управления автомобилем.
+      description: Метод предназначен для сохранения в БД данных новой записи управления автомобилем.
       operationId: storedriving_cars
       tags:
         - Driving cars
@@ -367,6 +379,18 @@ paths:
           required: true
           schema:
             type: string
+        - name: car_id
+          in: query
+          description: добавить id автомобиля, существующего в базе
+          required: true
+          schema:
+            type: integer
+        - name: client_id
+          in: query
+          description: добавить id клиента, существующего в базе
+          required: true
+          schema:
+            type: integer
       requestBody:
         required: true
         content:
@@ -506,7 +530,6 @@ components:
       required:
         - client_id
         - car_id
-        - status
       properties:
         id:
           type: string
