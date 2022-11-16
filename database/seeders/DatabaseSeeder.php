@@ -21,10 +21,12 @@ class DatabaseSeeder extends Seeder
         Client::factory(15)->create();
 
         \App\Models\Status::create([
+            'code' => 0,
             'title' => 'Авто не занято, клиент свободен',
         ]);
 
         \App\Models\Status::create([
+            'code' => 1,
             'title' => 'Авто занято клиентом'
         ]);
 

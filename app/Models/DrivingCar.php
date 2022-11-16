@@ -24,6 +24,6 @@ class DrivingCar extends Model
     }
 
     public function statuses() {
-        return $this->belongsTo(Status::class, 'status', 'id');
+        return $this->belongsTo(Status::class, 'status', 'code');
     }
 }

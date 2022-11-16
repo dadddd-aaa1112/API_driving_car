@@ -26,19 +26,19 @@ class StoreRequest extends FormRequest
         return [
             'client_id' => 'required|exists:clients,id',
             'car_id' => 'required|exists:cars,id',
-            'status' => 'required|exists:statuses,id',
+            'status' => 'required|exists:statuses,code',
         ];
     }
 
     public function messages()
     {
         return [
-            'client_id.required' => 'Необходимо выбрать клиента',
-            'client_id.exists' => 'Необходимо выбрать клиента',
-            'car_id.required' => 'Необходимо выбрать автомобиль',
-            'car_id.exists' => 'Необходимо выбрать автомобиль',
-            'status.required' => 'Необходимо выбрать статус',
-            'status.exists' => 'Необходимо выбрать статус',
+            'client_id.required' => 'Необходимо указать клиента',
+            'client_id.exists' => 'Необходимо выбрать существующего клиента из базы',
+            'car_id.required' => 'Необходимо указать автомобиль',
+            'car_id.exists' => 'Необходимо выбрать существующий автомобиль из базы',
+            'status.required' => 'Необходимо указать статус',
+            'status.exists' => 'Необходимо выбрать существующий статус из базы',
         ];
     }
 }
